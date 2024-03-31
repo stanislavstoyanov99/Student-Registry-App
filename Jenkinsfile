@@ -10,11 +10,13 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                def testResult = bat(script: 'npm test', returnStatus: true)
-                if (testResult == 0) {
-                    currentBuild.result = 'SUCCESS'
-                } else {
-                    currentBuild.result = 'FAILURE'
+                script {
+                    def testResult = bat(script: 'npm test', returnStatus: true)
+                    if (testResult == 0) {
+                        currentBuild.result = 'SUCCESS'
+                    } else {
+                        currentBuild.result = 'FAILURE'
+                    }
                 }
             }
         }
