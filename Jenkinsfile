@@ -36,6 +36,10 @@ pipeline {
         }
 
         stage('Deploying to Docker') {
+            when {
+                expression { currentBuild.result == 'SUCCESS' }
+            }
+            
             steps {
                 script {
                     bat 'docker pull stanislavstoyanov369/student-registry-app:1.0.0'
