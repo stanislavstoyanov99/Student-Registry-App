@@ -10,7 +10,7 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                def testResult = bat returnStatus: true, script: 'npm test'
+                def testResult = bat(script: 'npm test', returnStatus: true)
                 if (testResult == 0) {
                     currentBuild.result = 'SUCCESS'
                 } else {
@@ -23,7 +23,7 @@ pipeline {
             when {
                 expression { currentBuild.result == 'SUCCESS' }
             }
-            
+
             steps {
                 script {
                     bat 'docker build -t stanislavstoyanov369/student-registry-app:1.0.0 .'
